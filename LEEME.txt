@@ -1,0 +1,15 @@
+PROYECTO CRM EDUCATIVO - BASES DE DATOS I
+
+Contenido:
+- Documentacion: documentación general DOCX/PDF, manuales, consultas SQL y modelo entidad-relación.
+- BaseDatos: script de creación, datos ficticios y consultas de reportes.
+- Proyecto_VisualStudio: solución y código fuente de ASP.NET MVC.
+
+Inicio rápido:
+1) Crear la base CRM_Educativo en .\SQLEXPRESS.
+2) Ejecutar BaseDatos\Script_BaseDatos.sql y luego BaseDatos\Datos_Demostracion.sql una sola vez.
+3) Abrir Proyecto_VisualStudio\CRM_Educativo.sln en Visual Studio 2019, compilar y arrancar IIS Express.
+4) En la pantalla de acceso, abrir Configura la cuenta administradora y establecer usuario, correo y contraseña (mínimo 10 caracteres). Esta configuración inicial sólo se permite desde el equipo local y se desactiva al crear el primer administrador.
+5) Iniciar sesión. Para crear más cuentas, entrar a Usuarios y roles y asignarles Administrador u otro rol disponible.
+
+Las contraseñas se guardan con hash PBKDF2. No se envían ni se almacenan en texto legible. Las nuevas citas e interacciones quedan asociadas al usuario conectado. El alta de Docentes permite capturar manualmente datos personales, dirección y perfil profesional. Antes de entregar, verificar el período y la fecha con el catedrático, e incluir capturas actuales de la versión final.

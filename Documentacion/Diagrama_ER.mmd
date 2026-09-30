@@ -1,0 +1,371 @@
+erDiagram
+    Departamento ||--o{ Pais : "PaisId"
+    Municipio ||--o{ Departamento : "DepartamentoId"
+    Direccion ||--o{ Municipio : "MunicipioId"
+    Persona ||--o{ Direccion : "DireccionId"
+    Usuario ||--o{ Persona : "PersonaId"
+    Campus ||--o{ Direccion : "DireccionId"
+    Grado ||--o{ NivelEducativo : "NivelEducativoId"
+    Seccion ||--o{ Campus : "CampusId"
+    Seccion ||--o{ Grado : "GradoId"
+    PeriodoAcademico ||--o{ CicloEscolar : "CicloEscolarId"
+    Aula ||--o{ Campus : "CampusId"
+    Docente ||--o{ Persona : "PersonaId"
+    Aspirante ||--o{ Persona : "PersonaId"
+    Aspirante ||--o{ FuenteAspirante : "FuenteAspiranteId"
+    Aspirante ||--o{ Usuario : "UsuarioResponsableId"
+    Encargado ||--o{ Persona : "PersonaId"
+    Estudiante ||--o{ Persona : "PersonaId"
+    DocumentoPersona ||--o{ Persona : "PersonaId"
+    DocumentoPersona ||--o{ TipoDocumento : "TipoDocumentoId"
+    SolicitudAdmision ||--o{ Aspirante : "AspiranteId"
+    SolicitudAdmision ||--o{ Programa : "ProgramaId"
+    SolicitudAdmision ||--o{ Campus : "CampusId"
+    Cita ||--o{ Aspirante : "AspiranteId"
+    Cita ||--o{ Usuario : "UsuarioId"
+    Interaccion ||--o{ Aspirante : "AspiranteId"
+    Interaccion ||--o{ Usuario : "UsuarioId"
+    Interaccion ||--o{ CanalComunicacion : "CanalComunicacionId"
+    Seguimiento ||--o{ Aspirante : "AspiranteId"
+    Seguimiento ||--o{ Usuario : "UsuarioId"
+    Matricula ||--o{ Estudiante : "EstudianteId"
+    Matricula ||--o{ Seccion : "SeccionId"
+    Matricula ||--o{ CicloEscolar : "CicloEscolarId"
+    InscripcionCurso ||--o{ Matricula : "MatriculaId"
+    InscripcionCurso ||--o{ Curso : "CursoId"
+    InscripcionCurso ||--o{ Docente : "DocenteId"
+    InscripcionCurso ||--o{ Aula : "AulaId"
+    InscripcionCurso ||--o{ PeriodoAcademico : "PeriodoAcademicoId"
+    Asistencia ||--o{ InscripcionCurso : "InscripcionCursoId"
+    Evaluacion ||--o{ InscripcionCurso : "InscripcionCursoId"
+    Nota ||--o{ Evaluacion : "EvaluacionId"
+    Nota ||--o{ Estudiante : "EstudianteId"
+    Incidencia ||--o{ Estudiante : "EstudianteId"
+    Incidencia ||--o{ Usuario : "UsuarioId"
+    Notificacion ||--o{ Usuario : "UsuarioId"
+    Notificacion ||--o{ PlantillaMensaje : "PlantillaMensajeId"
+    UsuarioRol ||--o{ Usuario : "UsuarioId"
+    UsuarioRol ||--o{ Rol : "RolId"
+    RolPermiso ||--o{ Rol : "RolId"
+    RolPermiso ||--o{ Permiso : "PermisoId"
+    AspiranteCampania ||--o{ Aspirante : "AspiranteId"
+    AspiranteCampania ||--o{ Campania : "CampaniaId"
+    EstudianteEncargado ||--o{ Estudiante : "EstudianteId"
+    EstudianteEncargado ||--o{ Encargado : "EncargadoId"
+    DocenteCurso ||--o{ Docente : "DocenteId"
+    DocenteCurso ||--o{ Curso : "CursoId"
+    DocenteCurso ||--o{ PeriodoAcademico : "PeriodoAcademicoId"
+    CursoPrograma ||--o{ Curso : "CursoId"
+    CursoPrograma ||--o{ Programa : "ProgramaId"
+    CursoPrerequisito ||--o{ Curso : "CursoId"
+    CursoPrerequisito ||--o{ Curso : "CursoPrerequisitoId"
+    CampaniaCanal ||--o{ Campania : "CampaniaId"
+    CampaniaCanal ||--o{ CanalComunicacion : "CanalComunicacionId"
+    AspirantePrograma ||--o{ Aspirante : "AspiranteId"
+    AspirantePrograma ||--o{ Programa : "ProgramaId"
+    UsuarioCampus ||--o{ Usuario : "UsuarioId"
+    UsuarioCampus ||--o{ Campus : "CampusId"
+    Pais {
+        INT PaisId PK
+        NVARCHAR_100 Nombre
+        CHAR_2 CodigoISO
+    }
+    Departamento {
+        INT DepartamentoId PK
+        INT PaisId FK
+        NVARCHAR_100 Nombre
+    }
+    Municipio {
+        INT MunicipioId PK
+        INT DepartamentoId FK
+        NVARCHAR_100 Nombre
+    }
+    Direccion {
+        INT DireccionId PK
+        INT MunicipioId FK
+        NVARCHAR_200 Linea1
+        NVARCHAR_200 Linea2
+        NVARCHAR_20 CodigoPostal
+    }
+    Persona {
+        INT PersonaId PK
+        INT DireccionId FK
+        NVARCHAR_100 Nombres
+        NVARCHAR_100 Apellidos
+        DATE FechaNacimiento
+        NVARCHAR_254 Correo
+        NVARCHAR_30 Telefono
+        DATE FechaCreacion
+    }
+    Rol {
+        INT RolId PK
+        NVARCHAR_60 Nombre
+        NVARCHAR_250 Descripcion
+    }
+    Permiso {
+        INT PermisoId PK
+        NVARCHAR_100 Nombre
+        NVARCHAR_250 Descripcion
+    }
+    Usuario {
+        INT UsuarioId PK
+        INT PersonaId FK
+        NVARCHAR_80 NombreUsuario
+        NVARCHAR_254 Correo
+        NVARCHAR_255 HashContrasena
+        BIT Activo
+    }
+    Campus {
+        INT CampusId PK
+        INT DireccionId FK
+        NVARCHAR_120 Nombre
+        NVARCHAR_30 Telefono
+        BIT Activo
+    }
+    Programa {
+        INT ProgramaId PK
+        NVARCHAR_120 Nombre
+        NVARCHAR_300 Descripcion
+        BIT Activo
+    }
+    NivelEducativo {
+        INT NivelEducativoId PK
+        NVARCHAR_80 Nombre
+    }
+    Grado {
+        INT GradoId PK
+        INT NivelEducativoId FK
+        NVARCHAR_80 Nombre
+    }
+    Seccion {
+        INT SeccionId PK
+        INT CampusId FK
+        INT GradoId FK
+        NVARCHAR_40 Nombre
+    }
+    CicloEscolar {
+        INT CicloEscolarId PK
+        NVARCHAR_30 Nombre
+        DATE FechaInicio
+        DATE FechaFin
+    }
+    PeriodoAcademico {
+        INT PeriodoAcademicoId PK
+        INT CicloEscolarId FK
+        NVARCHAR_40 Nombre
+        DATE FechaInicio
+        DATE FechaFin
+    }
+    Aula {
+        INT AulaId PK
+        INT CampusId FK
+        NVARCHAR_30 Codigo
+        INT Capacidad
+    }
+    Curso {
+        INT CursoId PK
+        NVARCHAR_30 Codigo
+        NVARCHAR_120 Nombre
+        NVARCHAR_300 Descripcion
+        BIT Activo
+    }
+    Docente {
+        INT DocenteId PK
+        INT PersonaId FK
+        DATE FechaContratacion
+        NVARCHAR_120 Especialidad
+        BIT Activo
+    }
+    FuenteAspirante {
+        INT FuenteAspiranteId PK
+        NVARCHAR_80 Nombre
+    }
+    Aspirante {
+        INT AspiranteId PK
+        INT PersonaId FK
+        INT FuenteAspiranteId FK
+        INT UsuarioResponsableId FK
+        NVARCHAR_30 Estado
+        DATE FechaRegistro
+    }
+    Encargado {
+        INT EncargadoId PK
+        INT PersonaId FK
+        NVARCHAR_100 Ocupacion
+    }
+    Estudiante {
+        INT EstudianteId PK
+        INT PersonaId FK
+        NVARCHAR_30 CodigoEstudiante
+        DATE FechaIngreso
+        NVARCHAR_20 Estado
+    }
+    TipoDocumento {
+        INT TipoDocumentoId PK
+        NVARCHAR_80 Nombre
+        BIT Obligatorio
+    }
+    DocumentoPersona {
+        INT DocumentoPersonaId PK
+        INT PersonaId FK
+        INT TipoDocumentoId FK
+        NVARCHAR_60 NumeroDocumento
+        NVARCHAR_400 RutaArchivo
+        DATE FechaEmision
+        DATE FechaVencimiento
+    }
+    SolicitudAdmision {
+        INT SolicitudAdmisionId PK
+        INT AspiranteId FK
+        INT ProgramaId FK
+        INT CampusId FK
+        DATE FechaSolicitud
+        NVARCHAR_25 Estado
+    }
+    CanalComunicacion {
+        INT CanalComunicacionId PK
+        NVARCHAR_60 Nombre
+    }
+    Campania {
+        INT CampaniaId PK
+        NVARCHAR_120 Nombre
+        DATE FechaInicio
+        DATE FechaFin
+        DECIMAL_12_2 Presupuesto
+        BIT Activa
+    }
+    Cita {
+        INT CitaId PK
+        INT AspiranteId FK
+        INT UsuarioId FK
+        DATE FechaHora
+        NVARCHAR_200 Motivo
+        NVARCHAR_20 Estado
+    }
+    Interaccion {
+        INT InteraccionId PK
+        INT AspiranteId FK
+        INT UsuarioId FK
+        INT CanalComunicacionId FK
+        DATE FechaHora
+        NVARCHAR_160 Asunto
+        NVARCHAR_1000 Detalle
+        NVARCHAR_300 Resultado
+    }
+    Seguimiento {
+        INT SeguimientoId PK
+        INT AspiranteId FK
+        INT UsuarioId FK
+        DATE FechaProgramada
+        DATE FechaCompletada
+        NVARCHAR_250 Tarea
+        NVARCHAR_20 Estado
+    }
+    Matricula {
+        INT MatriculaId PK
+        INT EstudianteId FK
+        INT SeccionId FK
+        INT CicloEscolarId FK
+        DATE FechaMatricula
+        NVARCHAR_20 Estado
+    }
+    InscripcionCurso {
+        INT InscripcionCursoId PK
+        INT MatriculaId FK
+        INT CursoId FK
+        INT DocenteId FK
+        INT AulaId FK
+        INT PeriodoAcademicoId FK
+    }
+    Asistencia {
+        INT AsistenciaId PK
+        INT InscripcionCursoId FK
+        DATE Fecha
+        NVARCHAR_15 Estado
+        NVARCHAR_250 Observacion
+    }
+    Evaluacion {
+        INT EvaluacionId PK
+        INT InscripcionCursoId FK
+        NVARCHAR_120 Nombre
+        DATE Fecha
+        DECIMAL_6_2 PunteoMaximo
+    }
+    Nota {
+        INT NotaId PK
+        INT EvaluacionId FK
+        INT EstudianteId FK
+        DECIMAL_6_2 Punteo
+        NVARCHAR_250 Observacion
+    }
+    Incidencia {
+        INT IncidenciaId PK
+        INT EstudianteId FK
+        INT UsuarioId FK
+        DATE FechaHora
+        NVARCHAR_50 Tipo
+        NVARCHAR_1000 Descripcion
+        NVARCHAR_20 Estado
+    }
+    PlantillaMensaje {
+        INT PlantillaMensajeId PK
+        NVARCHAR_120 Nombre
+        NVARCHAR_200 Asunto
+        NVARCHAR_MAX Cuerpo
+        BIT Activa
+    }
+    Notificacion {
+        INT NotificacionId PK
+        INT UsuarioId FK
+        INT PlantillaMensajeId FK
+        DATE FechaCreacion
+        NVARCHAR_500 Mensaje
+        BIT Leida
+    }
+    UsuarioRol {
+        INT UsuarioId FK
+        INT RolId FK
+        DATE FechaAsignacion
+    }
+    RolPermiso {
+        INT RolId FK
+        INT PermisoId FK
+    }
+    AspiranteCampania {
+        INT AspiranteId FK
+        INT CampaniaId FK
+        DATE FechaVinculacion
+    }
+    EstudianteEncargado {
+        INT EstudianteId FK
+        INT EncargadoId FK
+        NVARCHAR_50 Parentesco
+        BIT EsContactoPrincipal
+    }
+    DocenteCurso {
+        INT DocenteId FK
+        INT CursoId FK
+        INT PeriodoAcademicoId FK
+    }
+    CursoPrograma {
+        INT CursoId FK
+        INT ProgramaId FK
+        BIT EsObligatorio
+    }
+    CursoPrerequisito {
+        INT CursoId FK
+        INT CursoPrerequisitoId FK
+    }
+    CampaniaCanal {
+        INT CampaniaId FK
+        INT CanalComunicacionId FK
+    }
+    AspirantePrograma {
+        INT AspiranteId FK
+        INT ProgramaId FK
+    }
+    UsuarioCampus {
+        INT UsuarioId FK
+        INT CampusId FK
+        BIT EsPrincipal
+    }
